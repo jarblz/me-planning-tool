@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # Set Ruby version to suppress Heroku warning
-ruby '2.2.0'
+ruby '2.2.2'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.0'
 # Use puma server
@@ -48,6 +48,9 @@ group :development, :test do
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+
+  # pry for debugging!
+  gem 'pry-rails'
 end
 
 # Use bootstrap with SASS
@@ -60,6 +63,8 @@ end
 
 # Use devise for user authentication
 gem 'devise', '~> 3.4.1'
+gem 'devise_invitable', '~> 1.5.2'
+
 
 # For uploading files to S3
 gem 'aws-sdk', '~> 1.66.0'
