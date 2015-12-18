@@ -11,10 +11,56 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151207194132) do
+ActiveRecord::Schema.define(version: 20151215155244) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "postgis"
+
+  create_table "countries", force: :cascade do |t|
+    t.string    "name",                                                                null: false
+    t.geography "polygon", limit: {:srid=>4326, :type=>"geometry", :geographic=>true}
+  end
+
+  create_table "diseases", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "indicators", force: :cascade do |t|
+    t.integer  "project_id"
+    t.string   "indicator_name"
+    t.string   "indicator_value"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "project_countries", force: :cascade do |t|
+    t.integer "project_id", null: false
+    t.integer "country_id", null: false
+  end
+
+  create_table "project_diseases", force: :cascade do |t|
+    t.integer "project_id", null: false
+    t.integer "disease_id", null: false
+  end
+
+  create_table "projects", force: :cascade do |t|
+    t.string   "lead"
+    t.string   "contact_email"
+    t.string   "contact_phone"
+    t.string   "description"
+    t.datetime "funding_start"
+    t.datetime "funding_end"
+    t.float    "total_funding"
+    t.string   "donor"
+    t.integer  "total_treated"
+    t.integer  "total_trained"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "name"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "",    null: false

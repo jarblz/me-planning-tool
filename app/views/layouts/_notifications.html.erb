@@ -1,0 +1,29 @@
+<% if current_user %>
+  <div class="alerts-bar">
+    <% if notice %>
+      <div class="alert alert-success alert-dismissable" style="margin-top: 18px;">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <%= notice %>
+      </div>
+    <% end %>
+    <% if alert %>
+      <div class="alert alert-danger alert-dismissable" style="margin-top: 18px;">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <%= alert %>
+      </div>
+    <%end%>
+  </div>
+<% else %>
+  <% if notice %>
+    <div class="alert alert-success alert-dismissable" style="margin-top: 18px;">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <%= notice %>
+    </div>
+  <% end %>
+  <% if alert %>
+    <div class="alert alert-danger alert-dismissable" style="margin-top: 18px;">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <%= alert %>
+    </div>
+  <%end%>
+<% end %>

@@ -15,7 +15,7 @@
 # gem 'pg'
 #
 default: &default
-  adapter: postgresql
+  adapter: postgis
   encoding: unicode
   # For details on connection pooling, see rails configuration guide
   # http://guides.rubyonrails.org/configuring.html#database-pooling
@@ -80,6 +80,6 @@ test:
 #
 production:
   <<: *default
-  database: rails-starter-kit_production
-  username: rails-starter-kit
-  password: <%= ENV['RAILS-STARTER-KIT_DATABASE_PASSWORD'] %>
+  database: me-planning-production
+  username: scroot
+  password: <%= ENV['DB_PASSWORD'] %>

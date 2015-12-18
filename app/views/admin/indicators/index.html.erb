@@ -1,0 +1,29 @@
+<div class="container">
+  <h1>Indicator List</h1>
+
+  <table class='table table-striped'>
+    <thead>
+      <tr>
+        <th>Indicator Name</th>
+        <th>Last Updated</th>
+        <th>Indicator Value</th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @indicators.each do |indicator| %>
+        <tr>
+          <td> <%= indicator.indicator_name %></td>
+          <td> <%= indicator.updated_at %></td>
+          <td> <%= indicator.indicator_value %></td>
+          <td>
+            <%= link_to 'Edit', edit_admin_project_indicator_path(indicator.project_id, indicator.id), class: 'btn btn-primary btn-sm' %>  <%= link_to 'Destroy', "indicators/#{indicator.id}", class: 'btn btn-primary btn-sm', method: :delete, data: { confirm: 'Are you sure?'}%> <%= link_to 'Add Indicators', admin_project_indicators_path(indicator.project_id, indicator.id), class: 'btn btn-primary btn-sm' %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <br>
+  <%= link_to 'New Indicator', new_admin_project_indicator_path(@project.id), class: 'btn btn-primary' %>
+</div>

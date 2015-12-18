@@ -1,0 +1,22 @@
+<%= form_for [:admin, @project, @indicator], html: {class: 'form-horizontal'} do |f| %>
+
+  <div class="form-group">
+    <%= f.label :indicator_name, class: "col-sm-2 control-label" %>
+    <div class="col-sm-6">
+      <%= f.text_field :indicator_name, class: 'form-control', required: true %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :indicator_value, class: "col-sm-2 control-label" %>
+    <div class="col-sm-6">
+      <%= f.text_field :indicator_value, class: 'form-control', required: true %>
+    </div>
+  </div>
+
+  <%= f.hidden_field :project_id, value: @project.id %>
+  <div class="form-group form-group-bottom">
+    <div class="col-sm-offset-2 col-sm-6">
+      <%= f.submit "Submit", class: 'btn btn-primary' %>
+    </div>
+  </div>
+<% end %>

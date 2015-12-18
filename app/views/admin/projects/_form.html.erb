@@ -1,0 +1,122 @@
+<%= form_for [:admin, @project], html: {class: 'form-horizontal'} do |f| %>
+
+  <div class="form-group">
+    <%= f.label :name, class: "col-sm-2 control-label" %>
+    <div class="col-sm-6">
+      <%= f.text_field :name, class: 'form-control', required: true %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label "Project Lead", class: "col-sm-2 control-label" %>
+    <div class="col-sm-6">
+      <%= f.text_field :lead, class: 'form-control' %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :contact_email, class: "col-sm-2 control-label" %>
+    <div class="col-sm-6">
+      <%= f.text_field :contact_email, class: 'form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :contact_phone, class: "col-sm-2 control-label" %>
+    <div class="col-sm-6">
+      <%= f.text_field :contact_phone, class: 'form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :description, class: "col-sm-2 control-label" %>
+    <div class="col-sm-6">
+      <%= f.text_area :description, class: 'form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :funding_start, class: "col-sm-2 control-label" %>
+    <div class="col-sm-6">
+      <%= f.date_field :funding_start, class: 'form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :funding_end, class: "col-sm-2 control-label" %>
+    <div class="col-sm-6">
+      <%= f.date_field :funding_end, class: 'form-control' %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :total_funding, class: "col-sm-2 control-label" %>
+    <div class="col-sm-6">
+      <%= f.number_field :total_funding, :step => 'any', class: 'form-control' %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :donor, class: "col-sm-2 control-label" %>
+    <div class="col-sm-6">
+      <%= f.text_field :donor, class: 'form-control' %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :total_treated, class: "col-sm-2 control-label" %>
+    <div class="col-sm-6">
+      <%= f.number_field :total_treated, class: 'form-control' %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :total_trained, class: "col-sm-2 control-label" %>
+    <div class="col-sm-6">
+      <%= f.number_field :total_trained, class: 'form-control' %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label "Countries", class: "col-sm-2 control-label" %>
+    <div class="col-sm-6 ">
+      <% @project.countries.each do |country| %>
+        <strong>
+          <%= "#{country.name} " %>
+        </strong>
+      <% end %>
+    </div>
+  </div>
+
+  <%= f.fields_for :project_countries do |t| %>
+    <div class="form-group">
+      <%= t.label "Add Countries", class: "col-sm-2 control-label" %>
+      <div class="col-sm-6">
+        <%= t.collection_select(:country_ids, @countries, :id, :name, {}, {multiple: true, class: "chosen-select form-control", "data-placeholder" => 'Choose a Country'}) %>
+      </div>
+    </div>
+    <%= t.hidden_field :project_id, value: @project.id %>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label "Focus Areas", class: "col-sm-2 control-label" %>
+    <div class="col-sm-6 ">
+      <% @project.diseases.each do |disease| %>
+        <strong>
+          <%= "#{disease.name} " %>
+        </strong>
+      <% end %>
+    </div>
+  </div>
+
+  <%= f.fields_for :project_diseases do |t| %>
+    <div class="form-group">
+      <%= t.label "Add Focus Area", class: "col-sm-2 control-label" %>
+      <div class="col-sm-6">
+        <%= t.collection_select(:disease_ids, @diseases, :id, :name, {}, {multiple: true, class: "chosen-select form-control", "data-placeholder" => 'Choose a Disease'}) %>
+      </div>
+    </div>
+    <%= t.hidden_field :project_id, value: @project.id %>
+  <% end %>
+
+  <div class="form-group form-group-bottom">
+    <div class="col-sm-offset-2 col-sm-6">
+      <%= f.submit "Submit", class: 'btn btn-primary' %>
+    </div>
+  </div>
+<% end %>

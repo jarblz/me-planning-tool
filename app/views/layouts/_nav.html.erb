@@ -1,0 +1,17 @@
+<div class="right-hand-nav-links">
+  <div class="dropdown-floated">
+    <a href="<%= destroy_user_session_url %>">
+      <%= image_tag 'ic_power_settings_new.svg', width: '30','data-placement' => 'bottom', "data-toggle" => "tooltip", "title" => "Log Out" %>
+    </a>
+  </div>
+  <% if current_user.admin %>
+    <div class="dropdown-floated">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+        <%= image_tag 'ic_lock_open.svg', width: '30', 'data-placement' => 'left', "data-toggle" => "tooltip", "title" => "Admin Options" %>
+      </a>
+      <ul class="dropdown-menu dropdown-menu-right">
+        <%= render 'layouts/admin_links' %>
+      </ul>
+    </div>
+  <% end %>
+</div>

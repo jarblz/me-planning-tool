@@ -1,17 +1,47 @@
-<%= form_for [:admin, @user] do |f| %>
+<%= form_for [:admin, @user], html: {class: 'form-horizontal'} do |f| %>
   <% if @user.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
-
       <ul>
-      <% @user.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+      <% if @user.errors.full_messages.first %>
+        <div class="alert alert-danger alert-dismissable" style="margin-top: 18px;">
+          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+          <%= @user.errors.full_messages.first.message %>
+        </div>
       <% end %>
       </ul>
     </div>
   <% end %>
+  <div class="form-group">
+    <%= f.label :email, class: "col-sm-2 control-label" %>
+    <div class="col-sm-6">
+      <%= f.text_field :email, class: 'form-control', required: true %>
+    </div>
+  </div>
 
-  <div class="actions">
-    <%= f.submit %>
+  <div class="form-group" data-toggle="buttons-radio">
+    <%= f.label :admin, class: "col-sm-2 control-label" %>
+    <div class="col-sm-6">
+      <%= f.check_box :admin %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :password, class: 'col-sm-2 control-label' %>
+    <div class="col-sm-6">
+      <%= f.password_field :password, class: 'form-control', required: true %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :password_confirmation, class: 'col-sm-2 control-label' %><br />
+    <div class="col-sm-6">
+      <%= f.password_field :password_confirmation, class: 'form-control', required: true %></p>
+    </div>
+  </div>
+
+  <div class="form-group form-group-bottom">
+    <div class="col-sm-offset-2 col-sm-6">
+      <%= f.submit "Submit", class: 'btn btn-primary' %>
+    </div>
   </div>
 <% end %>

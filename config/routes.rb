@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+
   root 'home#index'
 
   devise_for :users, controllers: {
@@ -7,7 +8,16 @@ Rails.application.routes.draw do
   }
   namespace 'admin' do
     resources :users, controller: 'users'
+    resources :diseases
+    resources :projects do
+      resources :indicators
+    end
   end
 
+  devise_scope :user do
+    get '/users/sign_out' => 'devise/sessions#destroy'
+  end
+
+  get 'home/countries' => 'home/countries' 
 
 end

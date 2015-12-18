@@ -1,3 +1,84 @@
 // "bootstrap-sprockets" must be imported before "bootstrap" and "bootstrap/variables"
-@import "bootstrap-sprockets";
-@import "bootstrap";
+// @import "bootstrap-sprockets";
+
+$blue: rgba(45, 58, 92, .8);
+
+.right-hand-nav-links {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+}
+
+.splash-background{
+  background: image-url('africa-night.jpg');
+  background-repeat: no-repeat;
+  background-position: cover;
+  height: 100vh;
+}
+
+.login {
+  background-color: rgba(255, 255, 255, .8);
+  width: 340px;
+  padding: 15px;
+  position: absolute;
+  top: 20%;
+  right: 20%;
+  text-align: center;
+  -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+  h1 {
+    font-size: 21px;
+    text-align: center;
+  }
+  .form-control {
+    border: 1px solid transparent;
+  }
+  .btn {
+    margin-top: 30px;
+    display: block;
+    width: 100%;
+    background: $blue;
+    color: #fff;
+  }
+}
+
+.dropdown-floated {
+  float: right;
+}
+
+.alerts-bar {
+  position: fixed;
+  right: 10px;
+  top: 25px;
+}
+
+.map-container {
+ height: 440px;
+ border-radius: 16px 16px;
+ box-shadow: 2px 2px 10px #B1B1B1;
+ overflow: hidden;
+
+}
+
+.map-canvas {
+ height: 440px;
+ border-radius: 16px 16px;
+}
+
+#map-outer{
+  height: 440px;
+  padding: 0px;
+}
+
+.chosen-container.chosen-container-multi {
+  width: 100%;
+
+}
+.row.row-map{
+  margin-right: 0px
+}
+.container.map-home{
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-top: 20px;
+}

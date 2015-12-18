@@ -1,2 +1,188 @@
-<h1>Home#index</h1>
-<p>Find me in app/views/home/index.html.erb</p>
+<div class="container map-home">
+  <div id='map-outer' class="col-lg-12">
+    <div class="col-lg-8">
+      <div class="row row-map">
+        <div class='map-container'>
+          <div id='map' class="map-canvas">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4 side-bar">
+      <div class="row">
+      <h4>RTI, Global Health Division</h4>
+      <div class="panel panel-default">
+        <div class="panel-heading">About This Tool</div>
+        <div class="panel-body">This is a tool we plan on using to track projects! You can use the dropdowns below to filter results. To See indicator values, click a given country.</div>
+      </div>
+      </div>
+      <div class="row">
+        <div id="indicators" hidden>
+          <h4><span id= 'project-name'></span></h4>
+          <table class="table table-striped table-bordered table-condensed">
+            <thead>
+              <tr>
+                <th>Indicator Name</th>
+                <th>Value</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Total Projects</td><td>
+                  <span id = 'total-projects'></span>
+                </td>
+              </tr>
+              <tr>
+                <td>Total Funding</td><td>
+                  <span id = 'total-funding'></span>
+                </td>
+              </tr>
+              <tr>
+                <td>Total Treated</td><td>
+                  <span id = 'total-treated'></span>
+                </td>
+              </tr>
+              </tr>
+                <td>Total Trained</td><td>
+                  <span id = 'total-trained'></span>
+                </td>
+              </tr>
+
+            </tbody>
+          </table>
+          <div class="pull-right">
+            <%= link_to "Go to Project", "#", class:'btn btn-primary btn-sm', id: 'project-link-button' %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-10">
+      <div class="dropdowns-panel">
+        <%= form_tag 'home/countries', method: 'get', class: "form-horizontal"  %>
+        <div class="form-group">
+          <label class="col-sm-12">Filters</label>
+          <div class="col-sm-4">
+            <%= select_tag 'disease_id', options_for_select(@diseases.collect{ |u| [u.name, u.id]}), prompt: 'Select Disease', class: 'form-control' %>
+          </div>
+          <div class="col-sm-4">
+            <%= select_tag 'project_id', options_for_select(@projects.collect{ |u| [u.name, u.id]}), prompt: 'Select Program', class: 'form-control' %>
+          </div>
+          <div class="col-sm-4">
+            <%= text_field_tag 'date_range', "01/01/1900 - 01/31/2200" %>
+            <div class="help">
+              Select Date Range
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-6">
+            <%= submit_tag 'Filter Results', class:'btn btn-primary btn-sm' %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+  L.mapbox.accessToken = 'pk.eyJ1IjoiamFyZWRhYmxlcyIsImEiOiJjaWk2Zmt1eXAwMWtvdDBrZjRybmNjdmRqIn0.YRNrryyThhQ5kT69-zkuSw'
+  var mapboxTiles = L.tileLayer('https://api.mapbox.com/v4/mapbox.dark/{z}/{x}/{y}.png?access_token=' + L.mapbox.accessToken, {
+    attribution: '<a href="http://www.mapbox.com/about/maps/" target="_blank">Terms &amp; Feedback</a>'
+  });
+  var map = L.map('map')
+    .addLayer(mapboxTiles)
+    .setView([5.0089434, 25.850055], 3);
+  countries = $.parseJSON("<%= escape_javascript(@country_geometries.html_safe)%>");
+
+
+  //non-highlighted style
+  var defaultStyle = {
+    fillColor: '#8bebad',
+    weight: .5,
+    opacity: .7,
+    color: 'black',
+    dashArray: '3',
+    fillOpacity: 0.4
+  };
+
+  var highlightStyle = {
+    fillColor: '#66ac7e',
+    weight: .5,
+    opacity: .7,
+    color: 'black',
+    dashArray: '3',
+    fillOpacity: 0.4
+  };
+
+  var onEachFeature = function(feature, layer) {
+    // A function that will set up a bunch of options for each layer we create
+    layer.setStyle(defaultStyle);
+    layer.on({
+      mouseover: highlightFeature,
+      mouseout: resetHighlight,
+      click: updateIndicators
+    });
+  };
+
+  // for each country passed, set up the geometry and give the layer necessary properties
+  $.each(countries, function(index, object) {
+    L.geoJson($.parseJSON(object.geometry), {
+      onEachFeature: onEachFeature,
+      countryId: object.properties.id,
+      countryName: object.properties.name,
+      countryIndicators: object.properties.country_indicators
+    }).addTo(map);
+  });
+
+
+  function highlightFeature(e) {
+    var layer = e.target;
+    layer.setStyle(highlightStyle);
+    // so the border doesn't clash with adjacent borders
+    if (!L.Browser.ie && !L.Browser.opera) {
+        layer.bringToFront();
+    }
+  }
+
+  //un-highlight
+  function resetHighlight(e) {
+    var layer = e.target;
+    layer.setStyle(defaultStyle);
+  }
+
+  //zoom to country
+  function zoomToFeature(e) {
+    map.fitBounds(e.target.getBounds());
+  }
+
+  // update indicators table and slideDown if hidden
+  function updateIndicators(e){
+    options = e.target.options;
+    countryIndicators = options.countryIndicators;
+    name = options.name;
+    id = options.id;
+    $('#total-projects').text(countryIndicators.total_projects);
+    $('#total-funding').text(countryIndicators.total_funding);
+    $('#total-treated').text(countryIndicators.total_treated);
+    $('#total-trained').text(countryIndicators.total_trained);
+    $('#project-name').text(options.countryName);
+    $("#project-link-button").attr("href", (""));
+    if ($('#indicators').not(':visible')){
+      $('#indicators').slideDown( "slow" );
+    }
+
+  }
+
+
+
+
+
+
+
+
+
+  //////////////////////////////////////////
+  $(function() {
+    $('input[name="date_range"]').daterangepicker();
+  });
+
+</script>
