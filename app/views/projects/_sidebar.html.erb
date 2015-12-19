@@ -1,0 +1,22 @@
+<div class="col-lg-4">
+  <h4> <%= project.name %> </h4>
+  <div class="border-attributes">
+    <table class='table borderless'>
+      <tr><td colspan="2">Project Lead: <%= project.lead %> </td></tr>
+      <tr><td colspan="2">Contact Email: <%= project.contact_email %> </td></tr>
+      <tr><td colspan="2">
+        Project description: <%= project.description.truncate(275) %>
+      </td></tr>
+      <tr>
+        <td> Funding Start: <%= project.funding_start.strftime('%m/%d/%Y') %> </td>
+        <td> Total Funding: <%= project.total_funding %></td>
+      </tr>
+      <tr>
+        <td> Funding End: <%= project.funding_end.strftime('%m/%d/%Y') %></td>
+        <td> Donor: <%= project.donor %></td>
+      </tr>
+      <tr><td colspan="2">Total number of people serviced/treated: <%= project.total_treated %> </td></tr>
+      <tr><td colspan="2">Total number of people trained: <%= project.total_trained %> </td></tr>
+    </table>
+  </div>
+</div>

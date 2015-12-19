@@ -1,6 +1,10 @@
 <div class="container map-home">
   <div id='map-outer' class="col-lg-12">
     <div class="col-lg-8">
+      <ol class="breadcrumb">
+        <li><a href="<%= root_url %>">Home</a></li>
+        <li class="active"><%= @country.name %> </a></li>
+      </ol>
       <div class="row row-map">
         <div class='map-container'>
           <div id='map' class="map-canvas">
@@ -8,10 +12,11 @@
         </div>
       </div>
     </div>
-    <%= render partial: 'sidebar' %>
-    <%= render partial: 'filters', locals: {projects: @projects, diseases: @diseases} %>
+    <%= render partial: 'sidebar', locals: { projects: @projects, country: @country } %>
+    <%= render partial: 'country_indicators', locals: {country: @country, indicators: @country_indicators} %>
   </div>
 </div>
+
 <script type="text/javascript">
   L.mapbox.accessToken = 'pk.eyJ1IjoiamFyZWRhYmxlcyIsImEiOiJjaWk2Zmt1eXAwMWtvdDBrZjRybmNjdmRqIn0.YRNrryyThhQ5kT69-zkuSw'
   var mapboxTiles = L.tileLayer('https://api.mapbox.com/v4/mapbox.dark/{z}/{x}/{y}.png?access_token=' + L.mapbox.accessToken, {
@@ -20,7 +25,7 @@
   var map = L.map('map')
     .addLayer(mapboxTiles)
     .setView([5.0089434, 25.850055], 3);
-  countries = $.parseJSON("<%= escape_javascript(@country_geometries.html_safe)%>");
+  country = $.parseJSON("<%= escape_javascript(@country_geometry.html_safe)%>");
 
 
   //non-highlighted style
@@ -54,16 +59,16 @@
     });
   };
 
-  // for each country passed, set up the geometry and give the layer necessary properties
-  $.each(countries, function(index, object) {
-    L.geoJson($.parseJSON(object.geometry), {
-      onEachFeature: onEachFeature,
-      countryId: object.properties.id,
-      countryName: object.properties.name,
-      countryIndicators: object.properties.country_indicators,
-      rootUrl: object.properties.root_url
-    }).addTo(map);
-  });
+  // for the current country passed, set up the geometry and give the layer necessary properties
+  countryPolygon = L.geoJson($.parseJSON(country.geometry), {
+    onEachFeature: onEachFeature,
+    countryId: country.properties.id,
+    countryName: country.properties.name,
+    countryIndicators: country.properties.country_indicators,
+  }).addTo(map);
+
+  // set map bounds to the current country
+  map.fitBounds(countryPolygon.getBounds())
 
 
   function highlightFeature(e) {
@@ -103,15 +108,6 @@
       $('#indicators').slideDown( "slow" );
     }
   }
-
-
-
-
-
-
-
-
-
   //////////////////////////////////////////
   $(function() {
     $('input[name="date_range"]').daterangepicker();

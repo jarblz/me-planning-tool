@@ -60,6 +60,14 @@ $blue: rgba(45, 58, 92, .8);
 
 }
 
+.map-container-2 {
+ height: 350px;
+ border-radius: 16px 16px;
+ box-shadow: 2px 2px 10px #B1B1B1;
+ overflow: hidden;
+
+}
+
 .map-canvas {
  height: 440px;
  border-radius: 16px 16px;
@@ -70,6 +78,12 @@ $blue: rgba(45, 58, 92, .8);
   padding: 0px;
 }
 
+#map-outer2{
+  height: 220px;
+  padding: 0px;
+}
+
+
 .chosen-container.chosen-container-multi {
   width: 100%;
 
@@ -77,8 +91,25 @@ $blue: rgba(45, 58, 92, .8);
 .row.row-map{
   margin-right: 0px
 }
+
 .container.map-home{
   padding-left: 5px;
   padding-right: 5px;
   padding-top: 20px;
+}
+
+.side-bar-scroll {
+  overflow-y: scroll;
+  max-height: 480px;
+}
+
+.borderless td, .borderless th {
+  border: none;
+}
+.borderless th, .borderless td {
+  border-top: none !important;
+}
+ol.breadcrumb {
+  margin-bottom: 0px;
+  background: none;
 }

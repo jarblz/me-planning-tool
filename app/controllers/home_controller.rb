@@ -9,23 +9,23 @@ class HomeController < ApplicationController
       @countries = Country.find(params['country_ids'])
       Country.select("*, st_asgeojson(polygon) as geo").
       where(id: params['country_ids']).each do |result|
-        @geometries << { geom: result.geo }
         @country_geometries << {
           type: "Feature",
           geometry: result.geo,
           properties: {
             name: result.name,
             id: result.id,
-            country_indicators: Country.aggregate_indicators(result.id)
+            country_indicators: Country.aggregate_indicators(result.id),
+            root_url: root_url
           }
         }
       end
-      @country_geometries = @country_geometries.to_json
-    else
+      else
       # setting nil here because I am calling .html_safe in the view, which complains
       # if the target is nil or []
       @country_geometries = ""
     end
+    @country_geometries = @country_geometries.to_json
   end
 
   def countries

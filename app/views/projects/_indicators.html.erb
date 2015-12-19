@@ -1,0 +1,25 @@
+<div class="col-lg-10">
+  <h4>Full indicator list for <%= project.name %>: </h4>
+  <table class='table table-striped'>
+    <thead>
+      <tr>
+        <th>Indicator Name</th>
+        <th>Last Updated</th>
+        <th>Indicator Value</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% indicators.each do |indicator| %>
+        <tr>
+          <td> <%= indicator.indicator_name %></td>
+          <td> <%= indicator.updated_at %></td>
+          <td> <%= indicator.indicator_value %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <div class="pull-right">
+    <% link_to 'download these data as csv', '#'%>
+  </div>
+</div>
