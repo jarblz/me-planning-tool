@@ -3,9 +3,12 @@
 
 $blue: rgba(45, 58, 92, .8);
 
+
+
 .right-hand-nav-links {
   position: absolute;
   right: 10px;
+  z-index: 1;
   top: 10px;
 }
 
@@ -50,6 +53,13 @@ $blue: rgba(45, 58, 92, .8);
   position: fixed;
   right: 10px;
   top: 25px;
+  z-index: 1;
+}
+.alert {
+  position: fixed;
+  right: 10px;
+  top: 25px;
+  z-index: 1;
 }
 
 .map-container {

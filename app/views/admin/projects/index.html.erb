@@ -20,7 +20,7 @@
           <td> <%= project.funding_start %></td>
           <td> <%= project.funding_end %></td>
           <td>
-            <%= link_to 'Edit', edit_admin_project_path(project), class: 'btn btn-primary btn-sm' %>  <%= link_to 'Destroy', "projects/#{project.id}", class: 'btn btn-primary btn-sm', method: :delete, data: { confirm: 'Are you sure?' } %> <%= link_to 'Add Indicators', admin_project_indicators_path(project), class: 'btn btn-primary btn-sm' %>
+            <%= link_to 'Edit', edit_admin_project_path(project), class: 'btn btn-primary btn-sm' %>  <%= link_to 'Destroy', "projects/#{project.slug}", class: 'btn btn-primary btn-sm', method: :delete, data: { confirm: 'Are you sure?' } %> <%= link_to 'Add Indicators', admin_project_indicators_path(project.slug), class: 'btn btn-primary btn-sm' %>
           </td>
         </tr>
       <% end %>

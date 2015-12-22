@@ -11,11 +11,11 @@
           <%= link_to('(more)', project_path(country_id: country.slug, project_id: project.slug)) if project.description.length > 275 %>
         </td></tr>
         <tr>
-          <td> Funding Start: <%= project.funding_start.strftime('%m/%d/%Y') %> </td>
+          <td> Funding Start: <%= project.funding_start.try(:strftime, '%m/%d/%Y') %> </td>
           <td> Total Funding: <%= project.total_funding %></td>
         </tr>
         <tr>
-          <td> Funding End: <%= project.funding_end.strftime('%m/%d/%Y') %></td>
+          <td> Funding End: <%= project.funding_end.try(:strftime, '%m/%d/%Y') %></td>
           <td> Donor: <%= project.donor %></td>
         </tr>
         <tr><td colspan="2">Total number of people serviced/treated: <%= project.total_treated %> </td></tr>

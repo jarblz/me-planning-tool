@@ -70,7 +70,7 @@ class Admin::IndicatorsController < ApplicationController
     end
 
     def set_project
-      @project = Project.find(params[:project_id])
+      @project = Project.find_by(slug: params[:project_id])
 
     end
 

@@ -18,12 +18,13 @@
           <td> <%= indicator.updated_at %></td>
           <td> <%= indicator.indicator_value %></td>
           <td>
-            <%= link_to 'Edit', edit_admin_project_indicator_path(indicator.project_id, indicator.id), class: 'btn btn-primary btn-sm' %>  <%= link_to 'Destroy', "indicators/#{indicator.id}", class: 'btn btn-primary btn-sm', method: :delete, data: { confirm: 'Are you sure?'}%> <%= link_to 'Add Indicators', admin_project_indicators_path(indicator.project_id, indicator.id), class: 'btn btn-primary btn-sm' %>
+            <%= link_to 'Edit', edit_admin_project_indicator_path(@project.slug, indicator.id), class: 'btn btn-primary btn-sm' %>
+            <%= link_to 'Destroy', "indicators/#{indicator.id}", class: 'btn btn-primary btn-sm', method: :delete, data: { confirm: 'Are you sure?'}%>
           </td>
         </tr>
       <% end %>
     </tbody>
   </table>
   <br>
-  <%= link_to 'New Indicator', new_admin_project_indicator_path(@project.id), class: 'btn btn-primary' %>
+  <%= link_to 'New Indicator', new_admin_project_indicator_path(@project.slug), class: 'btn btn-primary' %>
 </div>
