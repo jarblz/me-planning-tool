@@ -6,7 +6,7 @@
 # require 'geo_ruby/geojson'    # GeoJSON
 # require 'rgeo'
 #
-# task :fix_broken_geometries => :environment do
+task :fix_broken_geometries => :environment do
 #   url = 'https://www.googleapis.com/fusiontables/v1/query?'
 #   url.insert(-1,'sql=')
 #   # query = "SELECT name, wkt_4326 FROM 1foc3xO9DyfSIF6ofvN0kp2bxSfSeKog5FbdWdQ WHERE name IN ('Morocco','Antarctica','Chile', 'United States', 'South Africa', 'Canada')"
@@ -32,4 +32,4 @@
 #       puts "polygon still nil ;( try again later"
 #     end
 #   end
-# end
+end
