@@ -1,5 +1,4 @@
 require "net/http"
-require 'pry'
 require 'georuby'
 require 'geo_ruby/kml'        # KML data
 require 'geo_ruby/georss'     # GeoRSS
