@@ -83,7 +83,7 @@ staging:
   host: <%= ENV['DB_HOST'] %>
   database: <%= ENV['DB_NAME'] %>
   username: <%= ENV['DB_USER_NAME'] %>
-  password: <%= ENV['DB_PASSWORD'] %>
+  password: <%= ENV['DB_PASS'] %>
 
 
 production:
@@ -91,4 +91,4 @@ production:
   host: <%= ENV['DB_HOST'] %>
   database: <%= ENV['DB_NAME'] %>
   username: <%= ENV['DB_USER_NAME'] %>
-  password: <%= ENV['DB_PASSWORD'] %>
+  password: <%= ENV['DB_PASS'] %>
