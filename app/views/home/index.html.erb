@@ -9,23 +9,29 @@
       </div>
     </div>
     <%= render partial: 'sidebar' %>
-    <%= render partial: 'filters', locals: {projects: @projects, diseases: @diseases} %>
+    <%= render partial: 'filters', locals: {
+      projects: @projects,
+      diseases: @diseases,
+      search_disease: @search_disease,
+      search_project: @search_project
+    } %>
   </div>
 </div>
+
 <script type="text/javascript">
   L.mapbox.accessToken = 'pk.eyJ1IjoiamFyZWRhYmxlcyIsImEiOiJjaWk2Zmt1eXAwMWtvdDBrZjRybmNjdmRqIn0.YRNrryyThhQ5kT69-zkuSw'
-  var mapboxTiles = L.tileLayer('https://api.mapbox.com/v4/mapbox.dark/{z}/{x}/{y}.png?access_token=' + L.mapbox.accessToken, {
+  var mapboxTiles = L.tileLayer('https://api.mapbox.com/v4/mapbox.light/{z}/{x}/{y}.png?access_token=' + L.mapbox.accessToken, {
     attribution: '<a href="http://www.mapbox.com/about/maps/" target="_blank">Terms &amp; Feedback</a>'
   });
+
   var map = L.map('map')
     .addLayer(mapboxTiles)
-    .setView([5.0089434, 25.850055], 3);
+    .setView([5.0089434, 25.850055], 2);
   countries = $.parseJSON("<%= escape_javascript(@country_geometries.html_safe)%>");
-
 
   //non-highlighted style
   var defaultStyle = {
-    fillColor: '#8bebad',
+    fillColor: '#006600',
     weight: .5,
     opacity: .7,
     color: 'black',
@@ -34,15 +40,13 @@
   };
 
   var highlightStyle = {
-    fillColor: '#66ac7e',
+    fillColor: '#15f615',
     weight: .5,
     opacity: .7,
     color: 'black',
     dashArray: '3',
     fillOpacity: 0.4
   };
-
-
 
   var onEachFeature = function(feature, layer) {
     // A function that will set up a bunch of options for each layer we create
@@ -61,7 +65,8 @@
       countryId: object.properties.id,
       countryName: object.properties.name,
       countryIndicators: object.properties.country_indicators,
-      rootUrl: object.properties.root_url
+      rootUrl: object.properties.root_url,
+      countrySlug: object.properties.slug
     }).addTo(map);
   });
 
@@ -81,40 +86,26 @@
     layer.setStyle(defaultStyle);
   }
 
-  //zoom to country
-  function zoomToFeature(e) {
-    map.fitBounds(e.target.getBounds());
-  }
-
   // update indicators table and slideDown if hidden
   function updateIndicators(e){
-    options = e.target.options;
+    // for some reason if we have a multipolygon, the information gets stored in _options
+    if (e.target.options == undefined){
+      options = e.target._options;
+    } else {
+      options = e.target.options;
+    }
     countryIndicators = options.countryIndicators;
     name = options.countryName;
     id = options.countryId;
-    root = options.rootUrl
+    root = options.rootUrl;
     $('#total-projects').text(countryIndicators.total_projects);
     $('#total-funding').text(countryIndicators.total_funding);
     $('#total-treated').text(countryIndicators.total_treated);
     $('#total-trained').text(countryIndicators.total_trained);
     $('#project-name').text(options.countryName);
-    $("#project-link-button").attr("href", (root + 'countries/' + id));
+    $("#country-link-button").attr("href", (root + 'countries/' + options.countrySlug));
     if ($('#indicators').not(':visible')){
       $('#indicators').slideDown( "slow" );
     }
   }
-
-
-
-
-
-
-
-
-
-  //////////////////////////////////////////
-  $(function() {
-    $('input[name="date_range"]').daterangepicker();
-  });
-
 </script>

@@ -4,16 +4,10 @@
     <div class="form-group">
       <label class="col-sm-12">Filters</label>
       <div class="col-sm-4">
-        <%= select_tag 'disease_id', options_for_select(diseases.collect{ |u| [u.name, u.id]}), prompt: 'Select Focal Area', class: 'form-control' %>
+        <%= select_tag 'disease_id', options_for_select(diseases.collect{ |u| [u.name, u.id]}, search_disease), prompt: 'Select Focal Area', class: 'form-control'  %>
       </div>
       <div class="col-sm-4">
-        <%= select_tag 'project_id', options_for_select(projects.collect{ |u| [u.name, u.id]}), prompt: 'Select Program', class: 'form-control' %>
-      </div>
-      <div class="col-sm-4">
-        <%= text_field_tag 'date_range', "01/01/1900 - 01/31/2200" %>
-        <div class="help">
-          Select Date Range
-        </div>
+        <%= select_tag 'project_id', options_for_select(projects.collect{ |u| [u.name, u.id]}, search_project), prompt: 'Select Project', class: 'form-control', selected: @search_project %>
       </div>
     </div>
     <div class="form-group">

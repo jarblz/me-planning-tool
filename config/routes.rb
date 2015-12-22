@@ -18,8 +18,8 @@ Rails.application.routes.draw do
     get '/users/sign_out' => 'devise/sessions#destroy'
   end
 
-  get 'home/countries' => 'home/countries'
+  get 'home/countries' => 'home#countries'
 
   get 'countries/:country_id/project/:project_id' => 'projects#show', as: 'project'
-  get 'countries/:id' => 'countries#show'
+  get 'countries/:id' => 'countries#show', as: 'country'
 end

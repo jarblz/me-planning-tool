@@ -3,7 +3,8 @@
     <div class="col-lg-8">
       <ol class="breadcrumb">
         <li><a href="<%= root_url %>">Home</a></li>
-        <li class="active"><%= @country.name %> </a></li>
+        <li><a href="<%= country_path(@country.slug) %>"> <%= @country.name %> </a></li>
+        <li class="active"><%= @project.name %> </a></li>
       </ol>
       <div class="col-lg-6">
         <div class="row row-map">
@@ -31,7 +32,7 @@
 
 <script type="text/javascript">
   L.mapbox.accessToken = 'pk.eyJ1IjoiamFyZWRhYmxlcyIsImEiOiJjaWk2Zmt1eXAwMWtvdDBrZjRybmNjdmRqIn0.YRNrryyThhQ5kT69-zkuSw'
-  var mapboxTiles = L.tileLayer('https://api.mapbox.com/v4/mapbox.dark/{z}/{x}/{y}.png?access_token=' + L.mapbox.accessToken, {
+  var mapboxTiles = L.tileLayer('https://api.mapbox.com/v4/mapbox.light/{z}/{x}/{y}.png?access_token=' + L.mapbox.accessToken, {
     attribution: '<a href="http://www.mapbox.com/about/maps/" target="_blank">Terms &amp; Feedback</a>'
   });
   var map = L.map('map')
@@ -42,7 +43,7 @@
 
   //non-highlighted style
   var defaultStyle = {
-    fillColor: '#8bebad',
+    fillColor: '#006600',
     weight: .5,
     opacity: .7,
     color: 'black',
@@ -51,7 +52,7 @@
   };
 
   var highlightStyle = {
-    fillColor: '#66ac7e',
+    fillColor: '#15f615',
     weight: .5,
     opacity: .7,
     color: 'black',

@@ -3,8 +3,8 @@ class CountriesController < ApplicationController
   # GET /countries/1
   # GET /countries/1.json
   def show
-    @country = Country.select("*, st_asgeojson(polygon) as geo").
-      where(id: params[:id]).first
+    @country = Country.friendly.select("*, st_asgeojson(polygon) as geo").
+      where(slug: params[:id]).first
     @projects = @country.projects
     @country_geometry = Array.new
     @country_indicators = Country.aggregate_indicators(@country.id)

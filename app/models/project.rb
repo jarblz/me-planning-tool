@@ -8,6 +8,9 @@ class Project < ActiveRecord::Base
   accepts_nested_attributes_for :diseases
   accepts_nested_attributes_for :countries
 
+  extend FriendlyId
+  friendly_id :name, use: :slugged
+
   before_destroy :destroy_relations
 
   def destroy_relations
