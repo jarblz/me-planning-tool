@@ -14,6 +14,8 @@
     </div>
     <%= render partial: 'sidebar', locals: { projects: @projects, country: @country } %>
     <%= render partial: 'country_indicators', locals: {country: @country, indicators: @country_indicators} %>
+    <%= render partial: 'filters', locals: {search_project: @search_project, search_disease: @search_disease, diseases: Disease.all, projects: @projects, country: @country} %>
+
   </div>
 </div>
 

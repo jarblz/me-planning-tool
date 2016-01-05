@@ -7,7 +7,7 @@ class ProjectsController < ApplicationController
       where(slug: params[:country_id]).first
     @project = Project.friendly.find_by(slug: params[:project_id])
     @country_geometry = Array.new
-    @country_indicators = Country.aggregate_indicators(@country.id)
+    @country_indicators = Country.aggregate_indicators(@country.id, search_disease = nil, search_project = nil)
     @country_geometry = {
       type: "Feature",
       geometry: @country.geo,

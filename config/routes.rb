@@ -22,4 +22,6 @@ Rails.application.routes.draw do
 
   get 'countries/:country_id/project/:project_id' => 'projects#show', as: 'project'
   get 'countries/:id' => 'countries#show', as: 'country'
+
+  get 'countries/country/projects' => 'countries#projects', as: 'country_projects'
 end

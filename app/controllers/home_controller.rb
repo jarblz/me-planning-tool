@@ -52,7 +52,7 @@ class HomeController < ApplicationController
           properties: {
             name: result.name,
             id: result.id,
-            country_indicators: Country.aggregate_indicators(result.id),
+            country_indicators: Country.aggregate_indicators(result.id, @search_disease, @search_project),
             root_url: root_url,
             slug: result.slug
           }

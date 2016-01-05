@@ -1,13 +1,14 @@
-<div class="col-lg-8 filters-section">
+<div class="col-lg-5 filters-section">
   <div class="panel panel-default">
     <div class="panel-heading">
       <h3 class="panel-title"><strong>Filter</strong> by <a href="" id = 'disease_filter'><u>Disease</u></a> or by <a href="" id = 'project_filter'><u>Project</u></a></h3>
     </div>
-    <%= form_tag 'home/countries', method: 'get', class: "form-horizontal"  %>
+    <%= form_tag country_projects_url, method: 'get', class: "form-horizontal"  %>
+    <%= hidden_field_tag "country_slug", country.slug %>
     <div class="panel-body">
       <div class="disease_filter" hidden>
         <div class="form-group">
-          <div class="col-sm-4">
+          <div class="col-sm-6">
             <%= select_tag 'disease_id', options_for_select(diseases.collect{ |u| [u.name, u.id]}, search_disease), prompt: 'Select Focal Area', class: 'form-control'  %>
           </div>
         </div>
@@ -20,7 +21,7 @@
       </div>
       <div class="project_filter" hidden>
         <div class="form-group">
-          <div class="col-sm-4 project_filter">
+          <div class="col-sm-6 project_filter">
             <%= select_tag 'project_id', options_for_select(projects.collect{ |u| [u.name, u.id]}, search_project), prompt: 'Select Project', class: 'form-control', selected: @search_project %>
           </div>
         </div>
