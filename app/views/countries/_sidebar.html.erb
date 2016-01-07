@@ -1,13 +1,13 @@
+<h3>Active Projects
+  <% if search_project_name || search_disease_name %>
+    /
+    <span class="badge">
+      <%= search_project_name || search_disease_name %>
+      <a href="<%= country_url(country.slug) %>" class = "reset-filters"><i class="remove glyphicon glyphicon-remove-sign glyphicon-white"></i></a>
+    </span>
+  <% end %>
+</h3>
 <div class="col-lg-4 side-bar-scroll">
-  <h3>Active Projects
-    <% if search_project_name || search_disease_name %>
-      /
-      <span class="badge">
-        <%= search_project_name || search_disease_name %>
-        <a href="<%= country_url(country.slug) %>" class = "reset-filters"><i class="remove glyphicon glyphicon-remove-sign glyphicon-white"></i></a>
-      </span>
-    <% end %>
-  </h3>
   <div class="scroll-border">
     <% projects.each do |project| %>
       <h4> <%= link_to project.name, project_path(country_id: country.slug, project_id: project.slug) %></a> </h4>
