@@ -45,9 +45,29 @@
   </div>
 
   <div class="form-group">
-    <%= f.label :total_funding, class: "col-sm-2 control-label" %>
+    <%= f.label :primary_indicator_name, class: "col-sm-2 control-label" %>
     <div class="col-sm-6">
-      <%= f.number_field :total_funding, :step => 'any', class: 'form-control' %>
+      <%= f.text_field :primary_indicator_name, class: 'form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :primary_indicator_value, class: "col-sm-2 control-label" %>
+    <div class="col-sm-6">
+      <%= f.number_field :primary_indicator_value, class: 'form-control' %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :secondary_indicator_name, class: "col-sm-2 control-label" %>
+    <div class="col-sm-6">
+      <%= f.text_field :secondary_indicator_name, class: 'form-control' %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :secondary_indicator_value, class: "col-sm-2 control-label" %>
+    <div class="col-sm-6">
+      <%= f.number_field :secondary_indicator_value, class: 'form-control' %>
     </div>
   </div>
 
@@ -55,20 +75,6 @@
     <%= f.label :donor, class: "col-sm-2 control-label" %>
     <div class="col-sm-6">
       <%= f.text_field :donor, class: 'form-control' %>
-    </div>
-  </div>
-
-  <div class="form-group">
-    <%= f.label :total_treated, class: "col-sm-2 control-label" %>
-    <div class="col-sm-6">
-      <%= f.number_field :total_treated, class: 'form-control' %>
-    </div>
-  </div>
-
-  <div class="form-group">
-    <%= f.label :total_trained, class: "col-sm-2 control-label" %>
-    <div class="col-sm-6">
-      <%= f.number_field :total_trained, class: 'form-control' %>
     </div>
   </div>
 

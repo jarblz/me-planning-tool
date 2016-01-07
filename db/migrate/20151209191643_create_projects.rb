@@ -7,10 +7,11 @@ class CreateProjects < ActiveRecord::Migration
       t.string :description
       t.datetime :funding_start
       t.datetime :funding_end
-      t.float :total_funding
       t.string :donor
-      t.integer :total_treated
-      t.integer :total_trained
+      t.string :primary_indicator_name
+      t.integer :primary_indicator_value
+      t.string :secondary_indicator_name
+      t.integer :secondary_indicator_value
       t.timestamps
     end
   end

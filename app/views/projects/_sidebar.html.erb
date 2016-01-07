@@ -7,16 +7,11 @@
       <tr><td colspan="2">
         Project description: <%= project.description.truncate(275) %>
       </td></tr>
-      <tr>
-        <td> Funding Start: <%= project.funding_start.try(:strftime, '%m/%d/%Y') %> </td>
-        <td> Total Funding: <%= project.total_funding %></td>
-      </tr>
-      <tr>
-        <td> Funding End: <%= project.funding_end.try(:strftime, '%m/%d/%Y') %></td>
-        <td> Donor: <%= project.donor %></td>
-      </tr>
-      <tr><td colspan="2">Total number of people serviced/treated: <%= project.total_treated %> </td></tr>
-      <tr><td colspan="2">Total number of people trained: <%= project.total_trained %> </td></tr>
+      <tr><td> Funding Start: <%= project.funding_start.try(:strftime, '%m/%d/%Y') %> </td></tr>
+      <tr><td> Funding End: <%= project.funding_end.try(:strftime, '%m/%d/%Y') %></td></tr>
+      <tr><td> Donor: <%= project.donor %></td></tr>
+      <tr><td><%= project.primary_indicator_name %>: <%= project.primary_indicator_value %></td></tr>
+      <tr><td><%= project.secondary_indicator_name %>: <%= project.secondary_indicator_value %></td></tr>
     </table>
   </div>
 </div>

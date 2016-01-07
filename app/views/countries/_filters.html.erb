@@ -1,4 +1,4 @@
-<div class="col-lg-5 filters-section">
+<div class="col-lg-5 filters-section" hidden>
   <div class="panel panel-default">
     <div class="panel-heading">
       <h3 class="panel-title"><strong>Filter</strong> by <a href="" id = 'disease_filter'><u>Focal Area</u></a> or by <a href="" id = 'project_filter'><u>Project</u></a></h3>
@@ -15,7 +15,7 @@
         <div class="form-group">
           <div class="col-sm-6">
             <%= submit_tag 'Filter Results', class:'btn btn-primary btn-sm' %>
-            <button type="button" class="btn btn-primary btn-sm reset-filters">Clear Filters</button>
+            <%= link_to 'Clear Filters', country_url(country.id), class:"btn btn-primary btn-sm reset-filters"%>
           </div>
         </div>
       </div>
@@ -28,7 +28,7 @@
         <div class="form-group">
           <div class="col-sm-6">
             <%= submit_tag 'Filter Results', class:'btn btn-primary btn-sm' %>
-            <button type="button" class="btn btn-primary btn-sm reset-filters">Clear Filters</button>
+            <%= link_to 'Clear Filters', country_url(country.id), class:"btn btn-primary btn-sm reset-filters"%>
           </div>
           <div class="col-sm-6">
           </div>

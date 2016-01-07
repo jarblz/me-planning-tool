@@ -1,19 +1,21 @@
-<h2><%= t "devise.invitations.new.header" %></h2>
+<div class="container">
+  <h2><%= t "devise.invitations.new.header" %></h2>
 
-<%= form_for resource, :as => resource_name, :url => invitation_path(resource_name), :html => {:method => :post,
-        class: 'form-horizontal'} do |f| %>
-  <%= devise_error_messages! %>
-<% resource.class.invite_key_fields.each do |field| -%>
-  <div class="form-group">
-    <%= f.label field, class: "col-sm-2 control-label"%>
-    <div class="col-sm-6">
-      <%= f.text_field field, class: 'form-control' %>
+  <%= form_for resource, :as => resource_name, :url => invitation_path(resource_name), :html => {:method => :post,
+          class: 'form-horizontal'} do |f| %>
+    <%= devise_error_messages! %>
+  <% resource.class.invite_key_fields.each do |field| -%>
+    <div class="form-group">
+      <%= f.label field, class: "col-sm-2 control-label"%>
+      <div class="col-sm-6">
+        <%= f.text_field field, class: 'form-control' %>
+      </div>
+    </div>
+  <% end -%>
+  <div class="form-group form-group-bottom">
+    <div class="col-sm-offset-2 col-sm-6">
+      <%= f.submit t("devise.invitations.new.submit_button"), class: 'btn btn-primary' %>
     </div>
   </div>
-<% end -%>
-<div class="form-group form-group-bottom">
-  <div class="col-sm-offset-2 col-sm-6">
-    <%= f.submit t("devise.invitations.new.submit_button"), class: 'btn btn-primary' %>
-  </div>
+  <% end %>
 </div>
-<% end %>

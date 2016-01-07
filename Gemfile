@@ -35,6 +35,9 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
+# settings for global indicator names
+gem "rails-settings-cached", "~> 0.4.0"
+
 # use postgis to store information regarding countries
 gem 'activerecord-postgis-adapter'
 # use georuby to for conversions of kml to wkt (or a lot of other stuff if we need it)

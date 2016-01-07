@@ -112,8 +112,8 @@
     id = options.countryId;
     root = options.rootUrl
     $('#total-projects').text(countryIndicators.total_projects);
-    $('#total-funding').text(countryIndicators.total_funding);
-    $('#total-treated').text(countryIndicators.total_treated);
+    $('#primary-indicator').text(countryIndicators.total_funding);
+    $('#primary-indicator').text(countryIndicators.total_treated);
     $('#total-trained').text(countryIndicators.total_trained);
     $('#project-name').text(options.countryName);
     $("#project-link-button").attr("href", (root + 'countries/' + id));

@@ -1,4 +1,5 @@
 class Admin::DiseasesController < ApplicationController
+  before_action :authenticate_admin
   before_action :set_disease, only: [:show, :edit, :update, :destroy]
 
   # GET /diseases
@@ -70,5 +71,11 @@ class Admin::DiseasesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def disease_params
       params.require(:disease).permit(:name)
+    end
+
+    def authenticate_admin
+      if !current_user.admin?
+        redirect_to root_url, alert: "You must be an admin to see that page!"
+      end
     end
 end

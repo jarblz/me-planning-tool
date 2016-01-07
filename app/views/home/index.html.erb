@@ -8,7 +8,12 @@
         </div>
       </div>
     </div>
-    <%= render partial: 'sidebar' %>
+    <%= render partial: 'sidebar', locals: {
+      search_project_name: @search_project_name,
+      search_disease_name: @search_disease_name,
+      primary_name: @primary_indicator_name,
+      secondary_name: @secondary_indicator_name } %>
+
     <%= render partial: 'filters', locals: {
       projects: @projects,
       diseases: @diseases,
@@ -66,7 +71,9 @@
       countryName: object.properties.name,
       countryIndicators: object.properties.country_indicators,
       rootUrl: object.properties.root_url,
-      countrySlug: object.properties.slug
+      countrySlug: object.properties.slug,
+      searchProject: object.properties.search_project,
+      searchDisease: object.properties.search_disease
     }).addTo(map);
   });
 
@@ -98,12 +105,20 @@
     name = options.countryName;
     id = options.countryId;
     root = options.rootUrl;
+    if(!options.searchProject == false){
+      searchTerm = "?search_project="+options.searchProject
+    } else if (!options.searchDisease == false) {
+      searchTerm = "?search_disease="+options.searchDisease
+    } else {
+      searchTerm = ""
+    }
+
     $('#total-projects').text(countryIndicators.total_projects);
-    $('#total-funding').text(countryIndicators.total_funding);
-    $('#total-treated').text(countryIndicators.total_treated);
+    $('#primary-indicator').text(countryIndicators.primary_indicator);
+    $('#secondary-indicator').text(countryIndicators.secondary_indicator);
     $('#total-trained').text(countryIndicators.total_trained);
-    $('#project-name').text(options.countryName);
-    $("#country-link-button").attr("href", (root + 'countries/' + options.countrySlug));
+    $('#country-link-button').text(options.countryName);
+    $("#country-link-button").attr("href", (root + 'countries/' + options.countrySlug+searchTerm));
     if ($('#indicators').not(':visible')){
       $('#indicators').slideDown( "slow" );
     }

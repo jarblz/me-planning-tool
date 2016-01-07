@@ -113,6 +113,14 @@ $blue: rgba(45, 58, 92, .8);
   max-height: 480px;
 }
 
+.scroll-border {
+  border: solid;
+  border-color: gainsboro;
+  border-width: 1px;
+  padding-right: 5px;
+  padding-left: 5px;
+}
+
 .borderless td, .borderless th {
   border: none;
 }
@@ -130,4 +138,11 @@ ol.breadcrumb {
 
 .filters-section {
   padding-top: 15px;
+}
+i.remove.glyphicon.glyphicon-remove-sign.glyphicon-white {
+  color: white;
+  &:hover {
+    color: aquamarine;
+  }
+
 }

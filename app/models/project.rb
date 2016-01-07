@@ -27,13 +27,8 @@ class Project < ActiveRecord::Base
     return funding_starts.merge(funding_ends)
   end
 
-  def self.projects_by_disease(search_projects, id)
-    search = Disease.find(id).projects
-    if !search.blank?
-      return search.where(id: search_projects.ids)
-    else
-      return search
-    end
+  def self.projects_by_disease(id)
+    Disease.find(id).projects
   end
 
 

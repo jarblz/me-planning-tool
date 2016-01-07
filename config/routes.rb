@@ -13,6 +13,8 @@ Rails.application.routes.draw do
       resources :indicators
     end
   end
+  get 'admin/global_indicators' => "admin/indicators#edit_global", as: 'global_indicators'
+  get 'admin/global_indicators/:id' => "admin/indicators#save_global", as: 'save_global_indicators'
 
   devise_scope :user do
     get '/users/sign_out' => 'devise/sessions#destroy'
@@ -24,4 +26,6 @@ Rails.application.routes.draw do
   get 'countries/:id' => 'countries#show', as: 'country'
 
   get 'countries/country/projects' => 'countries#projects', as: 'country_projects'
+
+
 end

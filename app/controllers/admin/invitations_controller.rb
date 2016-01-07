@@ -8,3 +8,9 @@ class Admin::InvitationsController < Devise::InvitationsController
     end
   end
 end
+
+def authenticate_admin
+  if !current_user.admin?
+    redirect_to root_url, alert: "You must be an admin to see that page!"
+  end
+end

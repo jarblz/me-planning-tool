@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151222214150) do
+ActiveRecord::Schema.define(version: 20160107034544) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,6 +44,13 @@ ActiveRecord::Schema.define(version: 20151222214150) do
   add_index "friendly_id_slugs", ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id", using: :btree
   add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type", using: :btree
 
+  create_table "global_indicators", force: :cascade do |t|
+    t.string   "primary_indicator_name"
+    t.string   "secondary_indicator_name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "indicators", force: :cascade do |t|
     t.integer  "project_id"
     t.string   "indicator_name"
@@ -69,10 +76,11 @@ ActiveRecord::Schema.define(version: 20151222214150) do
     t.string   "description"
     t.datetime "funding_start"
     t.datetime "funding_end"
-    t.float    "total_funding"
     t.string   "donor"
-    t.integer  "total_treated"
-    t.integer  "total_trained"
+    t.string   "primary_indicator_name"
+    t.integer  "primary_indicator_value"
+    t.string   "secondary_indicator_name"
+    t.integer  "secondary_indicator_value"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "name"

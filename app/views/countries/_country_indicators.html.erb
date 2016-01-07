@@ -1,13 +1,21 @@
 <div class="col-lg-5 filters-section">
   <div class="panel panel-default">
     <div class="panel-heading">
-      <h3 class='panel-title'>Summary information for <%= country.name %></h3>
+      <h3 class='panel-title'>Summary information for <%= country.name %>
+        <% if search_project_name || search_disease_name %>
+          /
+          <span class="badge">
+            <%= search_project_name || search_disease_name %>
+            <a href="<%= country_url(country.slug) %>" class = "reset-filters"><i class="remove glyphicon glyphicon-remove-sign glyphicon-white"></i></a>
+          </span>
+        <% end %>
+      </h3>
     </div>
     <div class="panel-body">
-      <% indicators.each do |key, value| %>
-        <strong><%= key.to_s.titleize %>: </strong> <%= value %>
-        <br>
-      <% end %>
+      <strong>Total Projects: </strong> <%= indicators[:total_projects]%> <br>
+      <strong><%= primary_name %>: </strong> <%= indicators[:primary_indicator] %> <br>
+      <strong><%= secondary_name %>: </strong> <%= indicators[:secondary_indicator] %>
+      <br>
     </div>
   </div>
 </div>

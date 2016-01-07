@@ -12,9 +12,26 @@
         </div>
       </div>
     </div>
-    <%= render partial: 'sidebar', locals: { projects: @projects, country: @country } %>
-    <%= render partial: 'country_indicators', locals: {country: @country, indicators: @country_indicators} %>
-    <%= render partial: 'filters', locals: {search_project: @search_project, search_disease: @search_disease, diseases: Disease.all, projects: @projects, country: @country} %>
+    <%= render partial: 'sidebar', locals: {
+      projects: @projects,
+      country: @country,
+      search_project_name: @search_project_name,
+      search_disease_name: @search_disease_name } %>
+
+    <%= render partial: 'country_indicators', locals: {
+      country: @country,
+      indicators: @country_indicators,
+      search_project_name: @search_project_name,
+      search_disease_name: @search_disease_name,
+      secondary_name: @secondary_indicator_name,
+      primary_name: @primary_indicator_name } %>
+
+    <%= render partial: 'filters', locals: {
+      search_project: @search_project,
+      search_disease: @search_disease,
+      diseases: @diseases,
+      projects: @projects,
+      country: @country} %>
 
   </div>
 </div>
@@ -56,17 +73,13 @@
     layer.setStyle(defaultStyle);
     layer.on({
       mouseover: highlightFeature,
-      mouseout: resetHighlight,
-      click: updateIndicators
+      mouseout: resetHighlight
     });
   };
 
   // for the current country passed, set up the geometry and give the layer necessary properties
   countryPolygon = L.geoJson($.parseJSON(country.geometry), {
-    onEachFeature: onEachFeature,
-    countryId: country.properties.id,
-    countryName: country.properties.name,
-    countryIndicators: country.properties.country_indicators,
+    onEachFeature: onEachFeature
   }).addTo(map);
 
   // set map bounds to the current country
@@ -93,23 +106,6 @@
     map.fitBounds(e.target.getBounds());
   }
 
-  // update indicators table and slideDown if hidden
-  function updateIndicators(e){
-    options = e.target.options;
-    countryIndicators = options.countryIndicators;
-    name = options.countryName;
-    id = options.countryId;
-    root = options.rootUrl
-    $('#total-projects').text(countryIndicators.total_projects);
-    $('#total-funding').text(countryIndicators.total_funding);
-    $('#total-treated').text(countryIndicators.total_treated);
-    $('#total-trained').text(countryIndicators.total_trained);
-    $('#project-name').text(options.countryName);
-    $("#project-link-button").attr("href", (root + 'countries/' + id));
-    if ($('#indicators').not(':visible')){
-      $('#indicators').slideDown( "slow" );
-    }
-  }
   //////////////////////////////////////////
   $(function() {
     $('input[name="date_range"]').daterangepicker();

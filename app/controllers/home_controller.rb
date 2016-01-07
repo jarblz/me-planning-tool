@@ -14,7 +14,7 @@ class HomeController < ApplicationController
     def get_country_ids params
       search_projects = Project.all
       if !params['disease_id'].blank?
-        search_projects = Project.projects_by_disease(search_projects, params['disease_id'])
+        search_projects = Project.projects_by_disease(params['disease_id'])
       end
       if !params['project_id'].blank?
         search_projects = search_projects.where(id: params['project_id'])
@@ -37,9 +37,13 @@ class HomeController < ApplicationController
       end
       @search_project = params['search_project']
       @search_disease = params['search_disease']
+      @search_project_name = Project.where(id: @search_project).first.try(:name)
+      @search_disease_name = Disease.where(id: @search_disease).first.try(:name)
 
       @country_geometries = Array.new
       @countries = Country.find(@country_ids)
+      @primary_indicator_name = GlobalIndicator.first.primary_indicator_name
+      @secondary_indicator_name = GlobalIndicator.first.secondary_indicator_name
       setup_geometries
     end
 
@@ -54,7 +58,9 @@ class HomeController < ApplicationController
             id: result.id,
             country_indicators: Country.aggregate_indicators(result.id, @search_disease, @search_project),
             root_url: root_url,
-            slug: result.slug
+            slug: result.slug,
+            search_project: @search_project,
+            search_disease: @search_disease
           }
         }
       end

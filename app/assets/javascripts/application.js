@@ -18,9 +18,7 @@
 
 $(document).ready(function(e) {
 	// Use .ready to ensure turbolinks works properly
-	$(".alert-dismissable").fadeTo(2000, 500).slideUp(500, function(){
-		$(".alert-dismissable").alert('close');
-	});
+	$(".alert-dismissable").fadeTo(2000, 500).slideUp(500)
 	$('.chosen-select')
 		.trigger("chosen:updated")
 		.chosen({
@@ -44,11 +42,11 @@ $(document).ready(function(e) {
 		e.preventDefault();
 		fadeInProject();
 	});
-	$('.reset-filters').click(function(e) {
-		$('#disease_id').prop('selectedIndex',0);
-		$('#project_id').prop('selectedIndex',0);
-		$('.form-horizontal').submit();
-	});
+	// $('.reset-filters').click(function(e) {
+	// 	$('#disease_id').prop('selectedIndex',0);
+	// 	$('#project_id').prop('selectedIndex',0);
+	// 	$('.form-horizontal').submit();
+	// });
 })
 
 $('.chosen-select').chosen();

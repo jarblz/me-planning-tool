@@ -1,4 +1,5 @@
 class Admin::IndicatorsController < ApplicationController
+  before_action :authenticate_admin
   before_action :set_project, only: [:index, :new, :edit]
   before_action :set_indicator, only: [:show, :edit, :update, :destroy]
 
@@ -53,6 +54,27 @@ class Admin::IndicatorsController < ApplicationController
     end
   end
 
+  def edit_global
+    # we only want one record for global indicator
+    if GlobalIndicator.first.blank?
+      @global_indicators = GlobalIndicator.new
+    else
+      @global_indicators = GlobalIndicator.first
+    end
+  end
+
+  def save_global
+    @global_indicator = GlobalIndicator.find(params[:id])
+    respond_to do |format|
+      if @global_indicator.update(global_indicator_params)
+        format.html { redirect_to global_indicators_url, notice: 'Global Indicator names updated.' }
+      else
+        format.html { render :edit_global }
+        format.json { render json: @global_indicator.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   # DELETE /indicators/1
   # DELETE /indicators/1.json
   def destroy
@@ -77,5 +99,15 @@ class Admin::IndicatorsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def indicator_params
       params.require(:indicator).permit(:indicator_name, :indicator_value, :project_id)
+    end
+
+    def global_indicator_params
+      params.require(:global_indicator).permit(:primary_indicator_name, :secondary_indicator_name)
+    end
+
+    def authenticate_admin
+      if !current_user.admin?
+        redirect_to root_url, alert: "You must be an admin to see that page!"
+      end
     end
 end

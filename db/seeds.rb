@@ -8,6 +8,11 @@
 User.all.each do |u|
   u.destroy!
 end
+
+GlobalIndicator.all.each do |g|
+  g.destroy!
+end
+
 User.create!(
   email: "admin@standardco.de",
   password: "password",
@@ -17,3 +22,20 @@ User.create!(
   email: "user@standardco.de",
   password: "password"
 )
+
+GlobalIndicator.create!(
+  primary_indicator_name: "Primary Indicator",
+  secondary_indicator_name: "Secondary Indicator"
+)
+
+Disease.create!(
+  name: "HIV"
+)
+Disease.create!(
+  name: "Trachoma"
+)
+Disease.create!(
+  name: "Malaria"
+)
+
+Rake::Task['import_countries_from_fusion'].invoke

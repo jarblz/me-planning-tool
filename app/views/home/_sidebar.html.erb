@@ -1,18 +1,18 @@
 <div class="col-lg-4 side-bar">
   <div class="row">
-  <h4>RTI, Global Health Division</h4>
-  <div class="panel panel-default">
-    <div class="panel-heading">About This Tool</div>
-    <div class="panel-body">This is a tool we plan on using to track projects! You can use the dropdowns below to filter results. To See indicator values, click a given country.</div>
-  </div>
+    <h4>RTI, Global Health Division</h4>
   </div>
   <div class="row">
     <div id="indicators" hidden>
       <h4>
-        <span id= 'project-name'></span>
-        <div class="pull-right padding-bottom">
-          <%= link_to "Go to Country", "#", class:'btn btn-primary btn-sm', id: 'country-link-button' %>
-        </div>
+        <%= link_to "Country Name", "#", id: 'country-link-button' %>
+        <% if search_project_name || search_disease_name %>
+          /
+          <span class="badge">
+            <%= search_project_name || search_disease_name %>
+            <a href="<%= root_url %>" class = "reset-filters"><i class="remove glyphicon glyphicon-remove-sign glyphicon-white"></i></a>
+          </span>
+        <% end %>
       </h4>
       <table class="table table-striped table-bordered table-condensed">
         <thead>
@@ -28,18 +28,13 @@
             </td>
           </tr>
           <tr>
-            <td>Total Funding</td><td>
-              <span id = 'total-funding'></span>
+            <td> <%= primary_name %></td><td>
+              <span id = 'primary-indicator'></span>
             </td>
           </tr>
           <tr>
-            <td>Total Treated</td><td>
-              <span id = 'total-treated'></span>
-            </td>
-          </tr>
-          </tr>
-            <td>Total Trained</td><td>
-              <span id = 'total-trained'></span>
+            <td> <%= secondary_name %></td><td>
+              <span id = 'secondary-indicator'></span>
             </td>
           </tr>
 

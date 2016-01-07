@@ -1,4 +1,5 @@
 class Admin::ProjectsController < ApplicationController
+  before_action :authenticate_admin
   before_action :set_project, only: [:show, :edit, :update, :destroy]
   before_action :set_countries_and_diseases, only: [:new, :edit]
   # GET /projects
@@ -90,8 +91,9 @@ class Admin::ProjectsController < ApplicationController
         :name, :lead, :contact_email,
         :contact_phone, :description,
         :funding_start, :funding_end,
-        :total_funding, :donor,
-        :total_treated, :total_trained
+        :primary_indicator_name,:primary_indicator_value,
+        :secondary_indicator_name,:secondary_indicator_value,
+        :donor
       )
     end
 
@@ -101,6 +103,12 @@ class Admin::ProjectsController < ApplicationController
 
     def project_disease_params
       params.require(:project).require(:project_diseases).permit(disease_ids: [] )[:disease_ids]
+    end
+
+    def authenticate_admin
+      if !current_user.admin?
+        redirect_to root_url, alert: "You must be an admin to see that page!"
+      end
     end
 
 end

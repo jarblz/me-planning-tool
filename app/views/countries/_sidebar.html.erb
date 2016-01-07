@@ -1,6 +1,14 @@
-<div class="col-lg-4">
-  <h3>Active Projects</h3>
-  <div class="side-bar-scroll">
+<div class="col-lg-4 side-bar-scroll">
+  <h3>Active Projects
+    <% if search_project_name || search_disease_name %>
+      /
+      <span class="badge">
+        <%= search_project_name || search_disease_name %>
+        <a href="<%= country_url(country.slug) %>" class = "reset-filters"><i class="remove glyphicon glyphicon-remove-sign glyphicon-white"></i></a>
+      </span>
+    <% end %>
+  </h3>
+  <div class="scroll-border">
     <% projects.each do |project| %>
       <h4> <%= link_to project.name, project_path(country_id: country.slug, project_id: project.slug) %></a> </h4>
       <table class='table borderless'>
@@ -10,16 +18,10 @@
           Project description: <%= project.description.truncate(275) %>
           <%= link_to('(more)', project_path(country_id: country.slug, project_id: project.slug)) if project.description.length > 275 %>
         </td></tr>
-        <tr>
-          <td> Funding Start: <%= project.funding_start.try(:strftime, '%m/%d/%Y') %> </td>
-          <td> Total Funding: <%= project.total_funding %></td>
-        </tr>
-        <tr>
-          <td> Funding End: <%= project.funding_end.try(:strftime, '%m/%d/%Y') %></td>
-          <td> Donor: <%= project.donor %></td>
-        </tr>
-        <tr><td colspan="2">Total number of people serviced/treated: <%= project.total_treated %> </td></tr>
-        <tr><td colspan="2">Total number of people trained: <%= project.total_trained %> </td></tr>
+        <tr><td> Funding Range: <%= project.funding_start.try(:strftime, '%m/%d/%Y') %> -  <%= project.funding_end.try(:strftime, '%m/%d/%Y') %></td></tr>
+        <tr><td> Donor: <%= project.donor %></td></tr>
+        <tr><td><%= project.primary_indicator_name %>: <%= project.primary_indicator_value %></td></tr>
+        <tr><td><%= project.secondary_indicator_name %>: <%= project.secondary_indicator_value %></td></tr>
       </table>
       <hr>
     <% end %>
