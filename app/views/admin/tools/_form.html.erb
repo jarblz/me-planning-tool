@@ -1,0 +1,30 @@
+<%= form_for [:admin, @project_tool], html: {class: 'form-horizontal', multipart: true} do |f| %>
+  <% if @project_tool.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@project_tool.errors.count, "error") %> prohibited this project tool from being saved:</h2>
+      <ul>
+      <% @project_tool.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label "Tool Name", class: "col-sm-2 control-label" %>
+    <div class="col-sm-6">
+      <%= f.text_field :name, class: 'form-control'%>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :attatchment, class: "col-sm-2 control-label" %>
+    <div class="col-sm-6">
+      <%= f.file_field :attachment, class: 'form-control'%>
+    </div>
+  </div>
+  <div class="form-group form-group-bottom">
+    <div class="col-sm-offset-2 col-sm-6">
+      <%= f.submit "Submit", class: 'btn btn-primary' %>
+    </div>
+  </div>
+<% end %>

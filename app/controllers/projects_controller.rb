@@ -1,11 +1,12 @@
 class ProjectsController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_project
   # GET /projects/1
   # GET /projects/1.json
   def show
     @country = Country.friendly.select("*, st_asgeojson(polygon) as geo").
       where(slug: params[:country_id]).first
-    @project = Project.friendly.find_by(slug: params[:project_id])
+
     @country_geometry = Array.new
     @country_indicators = Country.aggregate_indicators(@country.id, search_disease = nil, search_project = nil)
     @country_geometry = {
@@ -24,5 +25,9 @@ class ProjectsController < ApplicationController
 
 
   private
+
+  def set_project
+    @project = Project.friendly.find_by(slug: params[:project_id])
+  end
 
 end

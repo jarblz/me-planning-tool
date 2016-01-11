@@ -41,5 +41,24 @@
         </tbody>
       </table>
     </div>
+
+    <div id="summary">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class='panel-title'>Summary Information For All Projects
+          </h3>
+        </div>
+        <div class="panel-body">
+          <strong>Countries with active projects: </strong> <%= @projects.count %>
+          <br>
+          <strong>Projects By Disease: </strong>
+          <ul><% disease_totals.each do |key, value| %>
+            <li><strong><%= key %>: </strong> <%= value %></li>
+          <% end %></ul>
+        </div>
+      </div>
+    </div>
+
+
   </div>
 </div>

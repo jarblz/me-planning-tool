@@ -67,6 +67,9 @@ end
 # Use bootstrap with SASS
 gem 'bootstrap-sass', '~> 3.3.3'
 
+# paperclip for file uploads
+gem "paperclip", "~> 4.3"
+
 group :production do
   # Use rails_12factor for Heroku compatibility
   gem 'rails_12factor', '~> 0.0.3'

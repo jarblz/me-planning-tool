@@ -39,7 +39,7 @@ class HomeController < ApplicationController
       @search_disease = params['search_disease']
       @search_project_name = Project.where(id: @search_project).first.try(:name)
       @search_disease_name = Disease.where(id: @search_disease).first.try(:name)
-
+      @disease_totals = Project.aggregate_diseases(@projects)
       @country_geometries = Array.new
       @countries = Country.find(@country_ids)
       @primary_indicator_name = GlobalIndicator.first.primary_indicator_name

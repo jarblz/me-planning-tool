@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     resources :diseases
     resources :projects do
       resources :indicators
+      resources :tools
     end
   end
   get 'admin/global_indicators' => "admin/indicators#edit_global", as: 'global_indicators'

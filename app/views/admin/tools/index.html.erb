@@ -1,0 +1,30 @@
+<div class="container">
+  <h1>All Tools for the <%=  @project.name %> project</h1>
+
+  <table width=500 class="table table-striped">
+    <thead>
+      <tr>
+        <th>Tool Name</th>
+        <th>Link</th>
+        <th colspan="1"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @project.project_tools.each do |tool| %>
+        <tr>
+          <td><%= tool.name %></td>
+          <td>
+            <%= link_to tool.attachment_file_name, tool.attachment.url %>
+          </td>
+          <td>
+            <%= link_to 'Destroy', "tools/#{tool.id}", class: 'btn btn-primary btn-sm', method: :delete, data: { confirm: 'Are you sure?'}%>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <%= link_to 'Add Tool', new_admin_project_tool_path(@project.slug), {class: 'btn btn-primary'}%>
+
+</div>

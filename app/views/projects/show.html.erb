@@ -14,14 +14,13 @@
           </div>
         </div>
       </div>
+      <br>
       <div class="col-lg-6">
         <div class="well">
           <h4>tools</h4>
-          <strong>Add New Data:</strong> <%= link_to "Upload MS Excel file", "#" %> <br>
-          <strong>Download project data:</strong> <%= link_to "Download all", "#" %> <br>
-          <strong>View USAID Report:</strong> <%= link_to "2013", "#" %>, <%= link_to "2014", "#" %>, <%= link_to "2015", "#" %> <br>
-          <strong>PEAR:</strong> <%= link_to "View project analysis report", "#" %> <br>
-          <%= link_to "View in Salesforce", "#" %>
+          <% @project.project_tools.each do |tool| %>
+            <strong> <%= tool.name %> </strong> <%= link_to tool.attachment_file_name, tool.attachment.url %> <br>
+          <% end %>
         </div>
       </div>
     </div>
@@ -29,6 +28,7 @@
     <%= render partial: 'indicators', locals: {country: @country, indicators: @project.indicators, project: @project} %>
   </div>
 </div>
+
 
 <script type="text/javascript">
   L.mapbox.accessToken = 'pk.eyJ1IjoiamFyZWRhYmxlcyIsImEiOiJjaWk2Zmt1eXAwMWtvdDBrZjRybmNjdmRqIn0.YRNrryyThhQ5kT69-zkuSw'

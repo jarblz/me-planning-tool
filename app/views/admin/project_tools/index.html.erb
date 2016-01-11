@@ -1,0 +1,23 @@
+<h1>All Tools for the <%=  @project.name %> project</h1>
+
+<table width=500 class="table table-striped">
+  <thead>
+    <tr>
+      <th>Tool Name</th>
+      <th>Link</th>
+      <th colspan="1"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @project.tools.each do |tool| %>
+      <tr>
+        <td><%= tool.name %></td>
+        <td><%= link_to 'Remove',
+              destroy_project_tool_path(@project.id, tool.id), {method: 'post'} %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to 'Add Tool', create_project_tool_path(@project.id), {class: 'btn btn-primary'}%>

@@ -4,6 +4,7 @@ class Project < ActiveRecord::Base
   has_many :diseases, through: :project_diseases
   has_many :countries, through: :project_countries
   has_many :indicators
+  has_many :project_tools, :foreign_key => "project_id"
 
   accepts_nested_attributes_for :diseases
   accepts_nested_attributes_for :countries
@@ -29,6 +30,16 @@ class Project < ActiveRecord::Base
 
   def self.projects_by_disease(id)
     Disease.find(id).projects
+  end
+
+  def self.aggregate_diseases(projects)
+    diseases = Hash.new(0)
+    projects.each do |project|
+      project.diseases.each do |disease|
+        diseases[disease.name] += 1
+      end
+    end
+    return diseases
   end
 
 

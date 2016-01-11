@@ -12,7 +12,8 @@
       search_project_name: @search_project_name,
       search_disease_name: @search_disease_name,
       primary_name: @primary_indicator_name,
-      secondary_name: @secondary_indicator_name } %>
+      secondary_name: @secondary_indicator_name,
+      disease_totals: @disease_totals } %>
 
     <%= render partial: 'filters', locals: {
       projects: @projects,
@@ -121,6 +122,11 @@
     $("#country-link-button").attr("href", (root + 'countries/' + options.countrySlug+searchTerm));
     if ($('#indicators').not(':visible')){
       $('#indicators').slideDown( "slow" );
+
+    }
+    if ($('#summary').is(':visible')){
+      $('#summary').slideUp( "slow" );
+
     }
   }
 </script>
